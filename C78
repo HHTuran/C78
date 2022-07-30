@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void f(){
+    int i;
+    int durum1;
+    int durum2;
+    int zar;
+    int zar2;
+
+    srand(time(NULL));
+
+    for(i = 0 ; i < 2 ; i++)
+    {
+        zar = rand() % 6 + 1;
+        durum1 = durum1 + zar;
+    }
+    printf("durum1: %d", durum1);
+    printf("\n");
+
+    if(durum1 == 7 || durum1 == 11){
+        printf("kazandiniz %d", durum1);
+    }
+
+    else if(durum1 == 2 || durum1 == 3 || durum1 == 12){
+        printf("kaybettiniz %d", durum1);
+    }
+
+    else {
+
+        do{
+            durum2 = 0;
+            for(i = 0 ; i < 2 ; i++)
+            {
+                zar2 = rand() % 6 + 1;
+                durum2 = durum2 + zar2;
+            }
+
+            printf("durum2: %d ",durum2);
+            printf("\n");
+
+            if(durum2 == 7){
+                printf("\n");
+                printf("durum1: %d durum2: %d", durum1, durum2);
+                printf("\n");
+                printf("kaybettiniz");
+                break;
+            }
+
+            if(durum1 == durum2){
+                printf("\n");
+                printf("kazandiniz");
+                break;
+            }
+        }while(durum1 != durum2);
+    }
+}
+
+int main() {
+    f();
+}
