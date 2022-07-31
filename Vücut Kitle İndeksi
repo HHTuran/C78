@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int kitleindeks(float boy, int kilo){
+
+    int indeks;
+    indeks = kilo / (boy*boy);
+    printf("%d \n", indeks);
+    if (indeks < 18){
+        printf("zayif");
+    }
+    else if(19 <= indeks && indeks <= 25){
+        printf("normal");
+    }
+    else if(26 <= indeks && indeks <= 30){
+        printf("kilolu");
+    }
+    else{
+        printf("obez");
+    }
+}
+
+int main() {
+    float boy;
+    int  kilo;
+    
+    printf("boy ve kiloyu giriniz:");
+    scanf("%f %d", &boy, &kilo);
+
+    kitleindeks(boy, kilo);
+}
