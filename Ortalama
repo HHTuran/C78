@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int hesapla(int ogrenci, int not){
+    int i, x, k = 0,ort = 0;
+    int dizi[100];
+    for (i = 0; i < ogrenci; i++){
+        printf("ogrencinin notunu giriniz:");
+        scanf("%d", &x);
+        dizi[i] = x;
+        if(dizi[i] < not){
+            k += 1;
+        }
+        ort = ort + dizi[i];
+    }
+
+    printf("kalan kisi sayisi: %d", k);
+    printf("\n");
+    printf("ortalama: %d", ort/ogrenci);
+
+}
+int main() {
+
+    int ogrenci_sayisi;
+    int not;
+
+    printf("ogrenci sayisi ve ders gecme notunu giriniz:");
+    scanf("%d %d", &ogrenci_sayisi, &not);
+
+    hesapla(ogrenci_sayisi, not);
+}
