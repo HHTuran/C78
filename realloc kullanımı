@@ -1,0 +1,34 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+int main(){
+    char a[50];
+    char b[50];
+    char *ptr;
+    printf("ad giriniz: ");
+    gets(a);
+    //bellekte karakter sayisi kadar yer acma
+    ptr = (char *) malloc(strlen(a) * sizeof(char));
+
+    //girdiyi actigimiz bellege atama
+    strcpy(ptr, a);
+
+    printf("soyad giriniz: ");
+    gets(b);
+
+    //bellekte karakter sayisi kadar ek yer acma
+    ptr = (char *) realloc(ptr, strlen(b) * sizeof(char));
+
+    //ilk eklemenin ardindan adresi ekledigimiz karakter kadar ilerletme ve bosluk atama
+    ptr += strlen(a);
+    strcpy(ptr," ");
+    //bosluk eklemenin ardindan bellege ikinci cumleyi atama
+    ptr++;
+    strcpy(ptr,b);
+    //pointeri dizinin ilk elemanina atama
+    ptr -= strlen(a)+1;
+    
+    printf("ad soyad:%s", ptr);
+    return 0;
+}
