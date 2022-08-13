@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(){
+int c,a, x=0;
+    int *ptr;
+
+    printf("eleman sayisini giriniz: ");
+    scanf("%d", &c);
+    ptr = (int *)calloc(c,sizeof(int));
+    printf("elemanlari giriniz: ");
+    for (int i = 0; i < c; i++) {
+        scanf("%d", &a);
+        *ptr = a;
+        if(*ptr > x){
+            x = *ptr;
+        }
+        ptr++;
+    }
+    printf("%d", x);
+}
