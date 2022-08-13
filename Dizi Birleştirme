@@ -1,0 +1,73 @@
+int main(){
+    int *dizi1, *dizi2, *dizi3;
+    int boyut1, boyut2, x, temp;
+    printf("ilk ve ikinci dizilerin eleman sayisini giriniz: ");
+    scanf("%d", &boyut1);
+    scanf("%d", &boyut2);
+
+    dizi1 = (int *)malloc(boyut1*sizeof(int));
+    dizi2 = (int *)malloc(boyut2*sizeof(int));
+    dizi3 = (int *)malloc((boyut1 + boyut2)*sizeof(int));
+
+    printf("dizi1'in elemanlarini girin: ");
+    for (int i = 0; i < boyut1; i++) {
+        scanf("%d", &x);
+        dizi1[i] = x;
+    }
+
+    printf("dizi2'nin elemanlarini girin: ");
+    for (int i = 0; i < boyut2; i++) {
+        scanf("%d", &x);
+        dizi2[i] = x;
+    }
+    //dizi1 siralama
+    for (int i = 1; i < boyut1; i++) {
+        for (int j = i; j > 0 && dizi1[j-1] > dizi1[j]; j--) {
+            temp = dizi1[j];
+            dizi1[j] = dizi1[j-1];
+            dizi1[j-1] = temp;
+        }
+    }
+
+    //dizi2 siralama
+    for (int i = 1; i < boyut2; i++) {
+        for (int j = i; j > 0 && dizi2[j-1] > dizi2[j]; j--) {
+            temp = dizi2[j];
+            dizi2[j] = dizi2[j-1];
+            dizi2[j-1] = temp;
+        }
+    }
+    //3.diziye atama islemi
+    int temp1=0;
+    for (int i = 0; i < boyut1 + boyut2; i++) {
+        for (int j = 0; j < boyut2 + boyut1; j++) {
+            if(dizi1[j] < dizi2[j]){
+                temp1 = *dizi1;
+                dizi3[i] = temp1;
+                dizi1 ++;
+                break;
+            }
+            else if(dizi2[j] < dizi1[j]){
+                temp1=*dizi2;
+                dizi3[i] = temp1;
+                dizi2 ++;
+                break;
+            }
+            else{
+                if(boyut1<boyut2){
+                    dizi3[i]=*dizi2;
+                    dizi2++;
+                    break;
+                } else{
+                    dizi3[i]=*dizi1;
+                    dizi1++;
+                    break;
+                }
+            }
+        }
+    }
+
+    for (int i = 0; i < boyut2 + boyut1; i++) {
+        printf("%d,", dizi3[i]);
+    }
+}
