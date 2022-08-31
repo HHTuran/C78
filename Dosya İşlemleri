@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "string.h"
-
 struct insan {
     char ad[10];
     char bolum[10];
