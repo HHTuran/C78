@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int number;
+    struct node *next;
+};
+typedef struct node node;
+node *head;
+
+//liste olusturma fonksiyonu
+node *listeOlustur(){
+    node *p;
+    int sayi;
+    printf("Eleman sayisini girin:");
+    scanf("%d", &sayi);
+
+    for (int i = 0; i < sayi; ++i) {
+        if(i == 0){
+            head = (node *) malloc(sizeof(node));
+            p = head;
+        }
+        else{
+            p->next = (node *) malloc(sizeof(node));
+            p = p->next;
+        }
+        printf("no:");
+        scanf("%d", &p->number);
+    }
+    p->next = NULL;
+    return head;
+}
+
+//listenin basina eleman ekleme fonksiyonu
+node *basaEkle(){
+    node *p;
+    p = (node *) malloc(sizeof(node));
+    printf("Basa eklenecek sayiyi girin:");
+    scanf("%d", &p->number);
+
+    p->next = head;
+    head = p;
+    return head;
+}
+
+//listede istedigin sayidan bir sonrasina eleman ekleme fonksiyonu
+node *arayaEkle(){
+    node *p = head, *q, *arayaEkleme;
+    int sayi;
+    arayaEkleme = (node *)malloc(sizeof(node));
+    printf("Hangi elemandan sonra sayi eklenecek:");
+    scanf("%d", &sayi);
+
+    while(p->number != sayi){
+        p = p->next;
+    }
+    q = p->next;
+    printf("Eklenecek sayiyi giriniz:");
+    scanf("%d", &arayaEkleme->number);
+    arayaEkleme->next = q;
+    p->next = arayaEkleme;
+
+    return head;
+}
+
+//listenin sonuna eleman ekleme fonksiyonu
+node *sonaEkle(){
+    node *p = head;
+    while (p->next != NULL){
+        p = p->next;
+    }
+    p->next = (node *) malloc(sizeof(node));
+    printf("Sona eklenecek sayiyi girin: ");
+    p = p->next;
+    scanf("%d", &p->number);
+    p->next = NULL;
+
+    return head;
+}
+
+//listeden istedigin elemani silen fonksiyon
+node *silme(){
+    node *p =head, *q = head;
+    int silme;
+    printf("Silinecek sayiyi girin:");
+    scanf("%d", &silme);
+    while (p->number != silme){
+        p = p->next;
+    }
+    //bastaki elemani silme
+    if(p == head){
+        head = head->next;
+        free(p);
+    }
+    //sondaki elemani silme
+    else if(p->next == NULL){
+        p = head;
+        while (p->next->next != NULL){
+            p = p->next;
+        }
+        free(p->next);
+        p->next = NULL;
+    }
+    //aradaki elemani silme
+    else{
+        while (q->next->number != p->number){
+            q = q->next;
+        }
+        q->next = p->next;
+        free(p);
+    }
+    return head;
+}
+
+//Bagli listeyi yazdiran fonksiyon
+node *yazdir(){
+    node *p = head;
+    while (p!=NULL){
+        printf("%d ", p->number);
+        p = p->next;
+    }
+}
+
+int main() {
+    listeOlustur();
+    basaEkle();
+    arayaEkle();
+    sonaEkle();
+    silme();
+    yazdir();
+
+    return 0;
+}
